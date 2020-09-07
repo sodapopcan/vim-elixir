@@ -52,8 +52,11 @@ syn match   elixirAtom "\%([a-zA-Z_]\w*[?!]\?\):\(:\)\@!"
 
 syn keyword elixirBoolean true false nil
 
-syn match elixirVariable '@[a-z]\w*'
 syn match elixirVariable '&\d\+'
+
+syn match elixirModuleAttribute '@[a-z]\w*'
+syn match elixirBuiltinModuleAttribute '@\(after_compile\|before_compile\|behaviour\|impl\|compile\|deprecated\|doc\|typedoc\|dialyzer\|external_resource\|file\|moduledoc\|on_definition\|on_load\|vsn\)'
+syn match elixirFunParam '&\d\+'
 
 syn keyword elixirPseudoVariable __FILE__ __DIR__ __MODULE__ __ENV__ __CALLER__ __STACKTRACE__
 
@@ -89,7 +92,7 @@ syn match elixirString             "\(\w\)\@<!?\%(\\\(x\d{1,2}\|\h{1,2}\h\@!\>\|
 syn region elixirBlock              matchgroup=elixirBlockDefinition start="\<do\>:\@!" end="\<end\>" contains=ALLBUT,@elixirNotTop fold
 syn region elixirAnonymousFunction  matchgroup=elixirBlockDefinition start="\<fn\>"     end="\<end\>" contains=ALLBUT,@elixirNotTop fold
 
-syn region elixirArguments start="(" end=")" contained contains=elixirOperator,elixirAtom,elixirPseudoVariable,elixirAlias,elixirBoolean,elixirVariable,elixirUnusedVariable,elixirNumber,elixirDocString,elixirAtomInterpolated,elixirRegex,elixirString,elixirStringDelimiter,elixirRegexDelimiter,elixirInterpolationDelimiter,elixirSigil,elixirAnonymousFunction,elixirComment
+syn region elixirArguments start="(" end=")" contained contains=elixirOperator,elixirAtom,elixirPseudoVariable,elixirAlias,elixirBoolean,elixirVariable,elixirUnusedVariable,elixirModuleAttribute,elixirBuiltinModuleAttribute,elixirNumber,elixirDocString,elixirAtomInterpolated,elixirRegex,elixirString,elixirStringDelimiter,elixirRegexDelimiter,elixirInterpolationDelimiter,elixirSigil,elixirAnonymousFunction,elixirComment
 
 syn match elixirDelimEscape "\\[(<{\[)>}\]/\"'|]" transparent display contained contains=NONE
 
@@ -216,6 +219,8 @@ hi def link elixirPseudoVariable             Constant
 hi def link elixirAlias                      Type
 hi def link elixirBoolean                    Boolean
 hi def link elixirVariable                   Identifier
+hi def link elixirModuleAttribute            Identifier
+hi def link elixirBuiltinModuleAttribute     Identifier
 hi def link elixirSelf                       Identifier
 hi def link elixirUnusedVariable             Comment
 hi def link elixirNumber                     Number

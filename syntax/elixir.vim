@@ -120,7 +120,7 @@ syntax region elixirLiveViewSigil matchgroup=elixirSigilDelimiter keepend start=
 syntax region elixirPhoenixESigil matchgroup=elixirSigilDelimiter keepend start=+\~E\z("""\)+ end=+^\s*\z1+ skip=+\\"+ contains=@HTML fold
 syntax region elixirPhoenixeSigil matchgroup=elixirSigilDelimiter keepend start=+\~e\z("""\)+ end=+^\s*\z1+ skip=+\\"+ contains=@HTML fold
 
-syn cluster elixirTemplateSigils contains=elixirLiveViewSigil,elixirHeexSigil,elixirSurfaceSigil,elixirPhoenixESigil,elixirPhoenixeSigil
+syn cluster elixirTemplateSigils contains=elixirLiveViewSigil,elixirHeexSigil,elixirSurfaceSigil,elixirPhoenixESigil,elixirPhoenixeSigil,elixirHologramSigil
 
 syn region heexComponent matchgroup=eelixirDelimiter start="<\.[a-z_]\+"  end="%\@<!>" contains=ALLBUT,@elixirNotTop keepend
 syn region eelixirExpression matchgroup=eelixirDelimiter start="<%"  end="%\@<!%>" contains=ALLBUT,@elixirNotTop containedin=@elixirTemplateSigils keepend
@@ -138,12 +138,20 @@ syn match heexSpecialAttribute ":\%(if\|for\|let\)\ze=" containedin=htmlTag
 syn match heexComponentName "<\zs\.[A-Z_a-z][A-Z_a-z0-9]\+" containedin=htmlTag
 syn match heexEndComponent "<\zs\/\.[A-Z_a-z][A-Z_a-z0-9]\+" containedin=htmlEndTag
 
+" Hologram
+syn region elixirHologramSigil matchgroup=elixirSigilDelimiter keepend start=+\~HOLO\=\z("""\)+ end=+^\s*\z1+ skip=+\\"+ contains=@HTML fold
+syn region elixirHologramBlockOpen matchgroup=heexDelimiter start="\zs{%\(for\|if\|raw\)" end="}" skip="%{[^}]*}" contains=ALLBUT,@elixirNotTop containedin=@elixirTemplateSigils keepend
+syn region elixirHologramBlockClose matchgroup=heexDelimiter start="\zs{/\(for\|if\|raw\)" end="}" skip="%{[^}]*}" containedin=@elixirTemplateSigils keepend
+syn region elixirHolgramInterpolation matchgroup=heexDelimiter start="\zs{[%/]\@!" end="}" skip="%{[^}]*}" contains=ALLBUT,elixirComment,@elixirNotTop containedin=elixirHologramSigil,htmlString
+syn match elixirHologramEventBinding "$\%(blur\|change\|click\|focus\|mouse_move\|pointer_cancel\|pointer_down\|pointer_move\|pointer_up\|select\|submit\|transition_\(cancel\|end\|run\|start\)transition_start\)\ze=" containedin=htmlTag
+
 hi def link eelixirDelimiter PreProc
 hi def link heexDelimiter PreProc
 hi def link heexComment Comment
 hi def link phxArg htmlArg
 hi def link heexArg htmlArg
 hi def link heexSpecialAttribute htmlArg
+hi def link elixirHologramEventBinding Keyword
 hi def link heexComponentName htmlTagName
 hi def link heexEndComponent htmlTagName
 

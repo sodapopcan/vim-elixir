@@ -127,10 +127,8 @@ syn region eelixirExpression matchgroup=eelixirDelimiter start="<%"  end="%\@<!%
 syn region eelixirExpression matchgroup=eelixirDelimiter start="<%=" end="%\@<!%>" contains=ALLBUT,@elixirNotTop containedin=@elixirTemplateSigils keepend
 syn region eelixirQuote matchgroup=eelixirDelimiter start="<%%" end="%\@<!%>" contains=ALLBUT,@elixirNotTop containedin=@elixirTemplateSigils keepend
 syn region heexComment matchgroup=eelixirDelimiter start="<%!--" end="%\@<!--%>" contains=elixirTodo,eelixirComment,@Spell containedin=@elixirTemplateSigils keepend
-syn region heexExpression matchgroup=heexDelimiter start="=\zs{" end="}" contains=ALLBUT,@elixirNotTop containedin=htmlValue keepend
-syn region heexExpression matchgroup=heexDelimiter start="=\zs{" end="}" skip="#{[^}]*}" contains=ALLBUT,@elixirNotTop containedin=htmlValue keepend
+syn region heexExpression matchgroup=heexDelimiter start="{" end="}" skip="#{[^}]*}" contains=ALLBUT,elixirComment,@elixirNotTop containedin=elixirHeexSigil,htmlValue
 " missing `keepend` on next line is intentional
-syn region heexExpression matchgroup=heexDelimiter start="=\zs{" end="}" skip="%{[^}]*}" contains=ALLBUT,@elixirNotTop containedin=htmlValue
 
 syn match phxArg "\<phx[-.0-9_a-z]*-[-.0-9_a-z]*\>" containedin=htmlTag
 syn match heexArg "\<[0-9_a-z]*\>\ze=" containedin=htmlTag

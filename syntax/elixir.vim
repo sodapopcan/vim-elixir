@@ -127,7 +127,7 @@ syn region eelixirExpression matchgroup=eelixirDelimiter start="<%"  end="%\@<!%
 syn region eelixirExpression matchgroup=eelixirDelimiter start="<%=" end="%\@<!%>" contains=ALLBUT,@elixirNotTop containedin=@elixirTemplateSigils keepend
 syn region eelixirQuote matchgroup=eelixirDelimiter start="<%%" end="%\@<!%>" contains=ALLBUT,@elixirNotTop containedin=@elixirTemplateSigils keepend
 syn region heexComment matchgroup=eelixirDelimiter start="<%!--" end="%\@<!--%>" contains=elixirTodo,eelixirComment,@Spell containedin=@elixirTemplateSigils keepend
-syn region heexExpression matchgroup=heexDelimiter start="{" end="}" skip="#{[^}]*}" contains=ALLBUT,elixirComment,@elixirNotTop containedin=elixirHeexSigil,htmlValue
+syn region heexExpression matchgroup=heexDelimiter start="\(%\([[:keyword:]\.]\+\)\=\)\@<!{" end="}" skip="#{[^}]*}" contains=ALLBUT,elixirComment,@elixirNotTop containedin=elixirHeexSigil,htmlValue
 " missing `keepend` on next line is intentional
 
 syn match phxArg "\<phx[-.0-9_a-z]*-[-.0-9_a-z]*\>" containedin=htmlTag
@@ -140,7 +140,7 @@ syn match heexEndComponent "<\zs\/\.[A-Z_a-z][A-Z_a-z0-9]\+" containedin=htmlEnd
 syn region elixirHologramSigil matchgroup=elixirSigilDelimiter keepend start=+\~HOLO\=\z("""\)+ end=+^\s*\z1+ skip=+\\"+ contains=@HTML fold
 syn region elixirHologramBlockOpen matchgroup=heexDelimiter start="\zs{%\(for\|if\|raw\)" end="}" skip="%{[^}]*}" contains=ALLBUT,@elixirNotTop containedin=@elixirTemplateSigils keepend
 syn region elixirHologramBlockClose matchgroup=heexDelimiter start="\zs{/\(for\|if\|raw\)" end="}" skip="%{[^}]*}" containedin=@elixirTemplateSigils keepend
-syn region elixirHolgramInterpolation matchgroup=heexDelimiter start="\zs{[%/]\@!" end="}" skip="%{[^}]*}" contains=ALLBUT,elixirComment,@elixirNotTop containedin=elixirHologramSigil,htmlString
+syn region elixirHolgramInterpolation matchgroup=heexDelimiter start="\(%\([[:keyword:]\.]\+\)\=\)\@<!{[%/]\@!" end="}" skip="%{[^}]*}" contains=ALLBUT,elixirComment,@elixirNotTop containedin=elixirHologramSigil,htmlString
 syn match elixirHologramEventBinding "$\%(blur\|change\|click\|focus\|mouse_move\|pointer_cancel\|pointer_down\|pointer_move\|pointer_up\|select\|submit\|transition_\(cancel\|end\|run\|start\)transition_start\)\ze=" containedin=htmlTag
 
 hi def link eelixirDelimiter PreProc
